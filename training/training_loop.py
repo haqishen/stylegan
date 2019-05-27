@@ -240,6 +240,8 @@ def training_loop(
             tick_time = ctx.get_time_since_last_update()
             total_time = ctx.get_time_since_start() + resume_time
 
+            import ipdb; ipdb.set_trace()
+
             # Report progress.
             print('tick %-5d kimg %-8.1f lod %-5.2f minibatch %-4d time %-12s sec/tick %-7.1f sec/kimg %-7.2f maintenance %-6.1f gpumem %-4.1f' % (
                 autosummary('Progress/tick', cur_tick),
