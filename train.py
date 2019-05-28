@@ -47,14 +47,20 @@ if 1:
     # desc += '-1gpu'; submit_config.num_gpus = 1; sched.minibatch_base = 4; sched.minibatch_dict = {4: 128, 8: 128, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8, 512: 4}
     # desc += '-2gpu'; submit_config.num_gpus = 2; sched.minibatch_base = 8; sched.minibatch_dict = {4: 256, 8: 256, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8}
     # desc += '-4gpu'; submit_config.num_gpus = 4; sched.minibatch_base = 16; sched.minibatch_dict = {4: 512, 8: 256, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8}
-    desc += '-8gpu'; submit_config.num_gpus = 8; sched.minibatch_base = 32; sched.minibatch_dict = {4: 512, 8: 256, 16: 128, 32: 64, 64: 32}
+    desc += '-8gpu';
 
     # Default options.
-    train.total_kimg = 99000
+    submit_config.num_gpus = 8
+    sched.minibatch_base = 32
+    sched.minibatch_dict = {4: 512, 8: 512, 16: 256, 32: 128, 64: 128, 128: 64, 256: 64}
     sched.lod_initial_resolution = 8
-    sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.003, 1024: 0.003}
+    sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.025, 1024: 0.003}
     sched.D_lrate_dict = {32: 0.0005, 64: 0.0005, 128: 0.0005, 256: 0.0005, 512: 0.0005, 1024: 0.003}
-    sched.tick_kimg_dict = {512:1000}
+    sched.tick_kimg_dict = {8:10, 16:10, 32:10, 64:10, 128:10, 256:10, 512:10, 1024:10}  # show info frequency
+
+    train.total_kimg = 99000
+    # 8    16   32   64   128 256  512  1024
+    # 1.2M 2.4M 3.6M 4.8M 6M  7.2M 8.4M 9.6M
 
     # WGAN-GP loss for CelebA-HQ.
     #desc += '-wgangp'; G_loss = EasyDict(func_name='training.loss.G_wgan'); D_loss = EasyDict(func_name='training.loss.D_wgan_gp'); sched.G_lrate_dict = {k: min(v, 0.002) for k, v in sched.G_lrate_dict.items()}; sched.D_lrate_dict = EasyDict(sched.G_lrate_dict)
