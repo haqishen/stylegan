@@ -53,7 +53,8 @@ if 1:
     train.total_kimg = 99000
     sched.lod_initial_resolution = 8
     sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.003, 1024: 0.003}
-    sched.D_lrate_dict = EasyDict(sched.G_lrate_dict)
+    sched.D_lrate_dict = {32: 0.0005, 64: 0.0005, 128: 0.0005, 256: 0.0005, 512: 0.0005, 1024: 0.003}
+    sched.tick_kimg_dict = {512:1000}
 
     # WGAN-GP loss for CelebA-HQ.
     #desc += '-wgangp'; G_loss = EasyDict(func_name='training.loss.G_wgan'); D_loss = EasyDict(func_name='training.loss.D_wgan_gp'); sched.G_lrate_dict = {k: min(v, 0.002) for k, v in sched.G_lrate_dict.items()}; sched.D_lrate_dict = EasyDict(sched.G_lrate_dict)
