@@ -241,9 +241,13 @@ def training_loop(
             total_time = ctx.get_time_since_start() + resume_time
 
             # Report progress.
-            print('tick %-5d kimg %-8.1f lod %-5.2f minibatch %-4d time %-12s sec/tick %-7.1f sec/kimg %-7.2f maintenance %-6.1f gpumem %-4.1f' % (
+            print('resolution %d, lr_G %.4f, lr_D %.4f, tick %-5d, kimg %-8.1f, checkpoint %d, lod %-5.2f, minibatch %-4d, time %-12s, %-7.1f sec/tick, %-7.2f sec/kimg, maintenance %-6.1f, gpumem %-4.1f' % (
+                autosummary('Progress/resolution', sched.resolution),
+                autosummary('Progress/lr_G', sched.G_lrate),
+                autosummary('Progress/lr_D', sched.D_lrate),
                 autosummary('Progress/tick', cur_tick),
                 autosummary('Progress/kimg', cur_nimg / 1000.0),
+                autosummary('Progress/checkpoint', tick_start_nimg + sched.tick_kimg),
                 autosummary('Progress/lod', sched.lod),
                 autosummary('Progress/minibatch', sched.minibatch),
                 dnnlib.util.format_time(autosummary('Timing/total_sec', total_time)),
