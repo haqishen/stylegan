@@ -54,9 +54,11 @@ if 1:
     sched.minibatch_base = 64
     sched.minibatch_dict = {4: 512, 8: 512, 16: 256, 32: 256, 64: 256, 128: 128, 256: 128}
     sched.lod_initial_resolution = 8
+    sched.lod_training_kimg = 1200
+    sched.lod_transition_kimg = 1200
     sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.025, 1024: 0.003}
-    sched.D_lrate_dict = {32: 0.0003, 64: 0.00015, 128: 0.0001, 256: 0.00005, 512: 0.00005, 1024: 0.00005}
-    # sched.tick_kimg_dict = {8:10, 16:10, 32:10, 64:10, 128:10, 256:10, 512:10, 1024:10}  # show info frequency
+    sched.D_lrate_dict = {32: 0.0003, 64: 0.0002, 128: 0.0002, 256: 0.0001, 512: 0.0001, 1024: 0.0001}
+    sched.tick_kimg_dict = {8:30, 16:30, 32:30, 64:30, 128:30, 256:30, 512:30, 1024:30}  # show info frequency
 
     train.total_kimg = 99_000
     # 8    16   32   64   128   256  512  1024
