@@ -138,6 +138,8 @@ def training_loop(
     resume_kimg             = 0.0,      # Assumed training progress at the beginning. Affects reporting and training schedule.
     resume_time             = 0.0):     # Assumed wallclock time at the beginning. Affects reporting.
 
+    print(sched_args)
+
     # Initialize dnnlib and TensorFlow.
     ctx = dnnlib.RunContext(submit_config, train)
     tflib.init_tf(tf_config)
@@ -247,7 +249,7 @@ def training_loop(
                 autosummary('Progress/lr_D', sched.D_lrate),
                 autosummary('Progress/tick', cur_tick),
                 autosummary('Progress/kimg', cur_nimg / 1000.0),
-                autosummary('Progress/checkpoint', tick_start_nimg + sched.tick_kimg),
+                autosummary('Progress/checkpoint', tick_start_nimg / 1000.0 + sched.tick_kimg),
                 autosummary('Progress/lod', sched.lod),
                 autosummary('Progress/minibatch', sched.minibatch),
                 dnnlib.util.format_time(autosummary('Timing/total_sec', total_time)),
