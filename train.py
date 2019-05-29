@@ -47,17 +47,17 @@ if 1:
     # desc += '-1gpu'; submit_config.num_gpus = 1; sched.minibatch_base = 4; sched.minibatch_dict = {4: 128, 8: 128, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8, 512: 4}
     # desc += '-2gpu'; submit_config.num_gpus = 2; sched.minibatch_base = 8; sched.minibatch_dict = {4: 256, 8: 256, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8}
     # desc += '-4gpu'; submit_config.num_gpus = 4; sched.minibatch_base = 16; sched.minibatch_dict = {4: 512, 8: 256, 16: 128, 32: 64, 64: 32, 128: 16, 256: 8}
-    desc += '-8gpu';
+    desc += '-8gpu'; # submit_config.num_gpus = 8; sched.minibatch_base = 32;
 
     # Default options.
     submit_config.num_gpus = 8
     sched.minibatch_base = 64
-    sched.minibatch_dict = {4: 512, 8: 512, 16: 256, 32: 256, 64: 256, 128: 128, 256: 128}
+    sched.minibatch_dict = {4: 512, 8: 512, 16: 256, 32: 256, 64: 128, 128: 128}
     sched.lod_initial_resolution = 8
-    sched.lod_training_kimg = 1200
-    sched.lod_transition_kimg = 1200
+    sched.lod_training_kimg = 900
+    sched.lod_transition_kimg = sched.lod_training_kimg
     sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.025, 1024: 0.003}
-    sched.D_lrate_dict = {32: 0.0003, 64: 0.0002, 128: 0.0002, 256: 0.0001, 512: 0.0001, 1024: 0.0001}
+    sched.D_lrate_dict = sched.G_lrate_dict
     sched.tick_kimg_dict = {8:30, 16:30, 32:30, 64:30, 128:30, 256:30, 512:30, 1024:30}  # show info frequency
 
     train.total_kimg = 99_000
