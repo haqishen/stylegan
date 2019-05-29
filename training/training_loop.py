@@ -85,7 +85,7 @@ def training_schedule(
     s.lod -= phase_idx
     if lod_transition_kimg > 0:
         s.lod -= max(phase_kimg - lod_training_kimg, 0.0) / lod_transition_kimg
-    s.lod = max(s.lod, 0.0)
+    s.lod = max(s.lod, 0.0)  # if set to 1.0, max_size is 256
     s.resolution = 2 ** (training_set.resolution_log2 - int(np.floor(s.lod)))
 
     # Minibatch size.
