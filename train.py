@@ -56,9 +56,10 @@ if 1:
     sched.lod_initial_resolution = 8
     sched.lod_training_kimg = 900
     sched.lod_transition_kimg = sched.lod_training_kimg
-    sched.G_lrate_dict = {128: 0.0015, 256: 0.002, 512: 0.025, 1024: 0.003}
-    sched.D_lrate_dict = sched.G_lrate_dict
+    sched.G_lrate_dict = {128: 0.0015, 256: 0.0020, 512: 0.0025, 1024: 0.0030}
+    sched.D_lrate_dict = sched.G_lrate_dict # {128: 0.0010, 256: 0.0010, 512: 0.0010, 1024: 0.0010}
     sched.tick_kimg_dict = {8:30, 16:30, 32:30, 64:30, 128:30, 256:30, 512:30, 1024:30}  # show info frequency
+
 
     train.total_kimg = 99_000
     # 8    16   32   64   128   256  512  1024
